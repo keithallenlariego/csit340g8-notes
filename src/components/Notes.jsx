@@ -40,7 +40,9 @@ function Notes() {
     setNotes([...notes, newNote])
     setForm({ title: '', body: '' })
     }
-
+        function handleDelete(id) {
+        setNotes(notes.filter((note) => note.id !== id))
+    }
 
   return (
 
@@ -61,28 +63,28 @@ function Notes() {
         </div>
         <form onSubmit={handleSubmit} className="grid gap-3">
 
-          <p className="text-[13px] font-normal tracking-wide text-[#949494]">NEW NOTE</p>
+            <p className="text-[13px] font-normal tracking-wide text-[#949494]">NEW NOTE</p>
 
-          <input
-            name="title"
-            value={form.title}
-            onChange={handleChange}
-            placeholder="Title"
-            className="..."   // keep your existing classes
-            />
-            <textarea
-            name="body"
-            value={form.body}
-            onChange={handleChange}
-            placeholder="Write your note"
-            className="..."   // keep your existing classes
-            />
-          <button
-            type="submit"
-            className="h-[50px] cursor-pointer bg-[#b83f45] text-[17px] font-normal text-white hover:bg-[#a33439]"
-          >
-            Add note
-          </button>
+            <input
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                placeholder="Title"
+                className="..."   // keep your existing classes
+                />
+                <textarea
+                name="body"
+                value={form.body}
+                onChange={handleChange}
+                placeholder="Write your note"
+                className="..."   // keep your existing classes
+                />
+            <button
+                type="submit"
+                className="h-[50px] cursor-pointer bg-[#b83f45] text-[17px] font-normal text-white hover:bg-[#a33439]"
+            >
+                Add note
+            </button>
 
         </form>
 
@@ -101,8 +103,9 @@ function Notes() {
                 <NoteCard title={note.title} body={note.body} />
                 <button
                     type="button"
+                    onClick={() => handleDelete(note.id)}
                     className="absolute top-4 right-5 cursor-pointer text-[26px] leading-none text-[#949494] hover:text-[#c18585]"
-                >
+                    >
                     ×
                 </button>
                 </li>
