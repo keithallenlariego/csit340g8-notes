@@ -1,5 +1,5 @@
 import NoteCard from "./NoteCard.jsx"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const startingNotes = [
   {
@@ -24,7 +24,7 @@ function Notes() {
     const [form, setForm] = useState({ title: '', body: '' })
     const [search, setSearch] = useState('')
 
-
+    const titleRef = useRef(null)
 
     useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes))
@@ -65,7 +65,10 @@ function Notes() {
 
     setNotes([...notes, newNote])
     setForm({ title: '', body: '' })
+    titleRef.current.focus()
     }
+
+
         function handleDelete(id) {
         setNotes(notes.filter((note) => note.id !== id))
     }
@@ -98,6 +101,7 @@ function Notes() {
             <p className="text-[13px] font-normal tracking-wide text-[#949494]">NEW NOTE</p>
 
             <input
+                ref={titleRef}
                 name="title"
                 value={form.title}
                 onChange={handleChange}
